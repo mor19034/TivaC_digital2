@@ -10,7 +10,7 @@ void setup() {
   // el boton se coloca como input:
   pinMode(buttonPin, INPUT_PULLUP);  
   //iniciar comunicacion serial
-  Serial.begin(4800);   
+  Serial.begin(9600);   
 }
 
 void loop() {
@@ -33,9 +33,9 @@ void loop() {
     // no hace nada:
     Serial.println(counter);  
   }
-//   //si el contador sube a un valor mayor a 255 se reinicia
-//   if else  (counter > 255) {
-//    counter = 0;  
-//      }
+   //si el contador sube a un valor mayor a 255 se reinicia
+   if  (counter > 255) {
+    counter = 0;  
+      }
   
 }
