@@ -4,10 +4,12 @@
 const int buttonPin1 = PUSH1;     // numero de pin de pushbutton 
 const int buttonPin2 = PUSH2;     // numero de pin de pushbutton 
 
+
 // variables will change:
 int buttonState1 = 0;         // variable para leer el estado del boton 1
 int buttonState2 = 0;         // variable para leer el estado del boton 2
 int presionado = 0;
+
   
 // the setup routine runs once when you press reset:
 void setup() {                

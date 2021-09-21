@@ -36,6 +36,6 @@ void loop() {
    //si el contador sube a un valor mayor a 255 se reinicia
    if  (counter > 255) {
     counter = 0;  
-      }
+        }
   
 }
