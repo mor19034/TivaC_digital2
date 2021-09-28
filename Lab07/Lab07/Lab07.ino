@@ -5,7 +5,7 @@
 File root;
 char opcion = '0';
 uint8_t control = 0;
-char inByte;
+char inByte; //variable que ingresa el usuario
 //----Prototipos-------
 void printDirectory(File dir, int numTabs);
 void readText(char dir);
@@ -17,13 +17,9 @@ void setup()
   SPI.setModule(0); //esto indica que puertos se van a usar
 
   Serial.print("Initializing SD card...");
-  // On the Ethernet Shield, CS is pin 4. It's set as an output by default.
-  // Note that even if it's not used as the CS pin, the hardware SS pin
-  // (10 on most Arduino boards, 53 on the Mega) must be left as an output
-  // or the SD library functions will not work.
   pinMode(PA_3, OUTPUT);
 
-  if (!SD.begin(PA_3)) {
+  if (!SD.begin(PA_3)) { //si no esta bien conectado sale error
     Serial.println("initialization failed!");
     return;
   }
@@ -34,9 +30,10 @@ void setup()
 
 void loop()
 {
-  if (control == 0) {
-    root = SD.open("/");
-    printDirectory(root, 0);
+  if (control == 0) { //esto sirve como bandera para que los mensajes que salen en la terminal se queden estáticos hasta que se
+    //seleccione una opción y despligue los datos.
+    root = SD.open("/"); //se almacena la lectura de la SD en una variable.
+    printDirectory(root, 0); //se imprime lo que contiene la varibale (datos que hay dentro de la SD).
     Serial.println("Escriba la posicion del archivo que desea ver: ");
     control++; //al aumentar el valor de control se asegura que el mensaje de menu no aparesca hasta que se halla seleccionado
   }             //una opcion.
@@ -45,7 +42,7 @@ void loop()
   }
   if (inByte == '1') {//si el valor recibido es un 1
     opcion = '1'; //se coloca un 1 a la opcion 
-    control--; //se coloca en 0 control para que se muestre el menu
+    control--; //se coloca en 0 control para que se muestre el menu de nuevo.
   }
   if (inByte == '2') {//misma logica que cuando se recibe un 1
     opcion = '2';
@@ -55,6 +52,10 @@ void loop()
     opcion = '3';
     control--;
   }
+  if (inByte == '4') {//misma logica que cuando se recibe un 1
+    opcion = '4';
+    control--;
+  }  
   readText(opcion);
   opcion = '0'; //se asegura que opcion siempre sea 0 para evitar que se muestre valores no deseados
 }
@@ -64,7 +65,7 @@ void readText(char dir) {
   File archivo;
   switch (dir) {//Se abre el archivo dependiendo del valor que tenga la variable opcion 
     case '1':
-      archivo = SD.open("ghost.txt");
+      archivo = SD.open("pikachu.txt");
       seleccion = 1; //habilita la rutina de mostrar el contenido
       break;
     case '2':
@@ -73,6 +74,10 @@ void readText(char dir) {
       break;
     case '3':
       archivo = SD.open("spider.txt");
+      seleccion = 1;
+      break;
+    case '4':
+      archivo = SD.open("BAD_BU~1.txt");
       seleccion = 1;
       break;
     default:
